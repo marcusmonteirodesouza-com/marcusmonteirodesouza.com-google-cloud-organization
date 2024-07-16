@@ -3,6 +3,7 @@ locals {
     "cloudbilling.googleapis.com",
     "cloudbuild.googleapis.com",
     "cloudresourcemanager.googleapis.com",
+    "compute.googleapis.com",
     "orgpolicy.googleapis.com",
     "secretmanager.googleapis.com",
   ]
