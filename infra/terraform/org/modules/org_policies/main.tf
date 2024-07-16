@@ -198,21 +198,6 @@ resource "google_org_policy_policy" "compute_restrictNonConfidentialComputing" {
   }
 }
 
-resource "google_org_policy_policy" "compute_restrictSharedVpcHostProjects" {
-  name   = "${local.org_policy_name_prefix}/compute.restrictSharedVpcHostProjects"
-  parent = local.org_policy_parent
-
-  spec {
-    rules {
-      values {
-        allowed_values = [
-          "under:${var.folder_networking_id}",
-        ]
-      }
-    }
-  }
-}
-
 resource "google_org_policy_policy" "compute_restrictXpnProjectLienRemoval" {
   name   = "${local.org_policy_name_prefix}/compute.restrictXpnProjectLienRemoval"
   parent = local.org_policy_parent
