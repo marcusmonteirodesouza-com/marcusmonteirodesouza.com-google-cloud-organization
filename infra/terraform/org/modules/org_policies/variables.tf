@@ -13,11 +13,6 @@ variable "all_users_ingress_tag_value_id" {
   description = "All users ingress tag value ID."
 }
 
-variable "folder_networking_id" {
-  type        = string
-  description = "Networking folder ID."
-}
-
 variable "org_id" {
   type        = string
   description = "The numeric ID of the organization."

@@ -1,5 +1,6 @@
 locals {
   enabled_apis = [
+    "cloudbilling.googleapis.com",
     "cloudbuild.googleapis.com",
     "cloudresourcemanager.googleapis.com",
     "orgpolicy.googleapis.com",
