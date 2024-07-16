@@ -315,9 +315,9 @@ resource "google_org_policy_policy" "iam_allowedPolicyMemberDomains" {
       allow_all = "TRUE"
 
       condition {
-        title       = "Allow ${google_tags_tag_key.all_users_ingress.short_name} tag"
+        title       = "Allow ${var.all_users_ingress_tag_key_short_name} tag"
         description = "See https://cloud.google.com/blog/topics/developers-practitioners/how-create-public-cloud-run-services-when-domain-restricted-sharing-enforced"
-        expression  = "resource.matchTagId('${data.google_tags_tag_key.all_users_ingress.id}', '${data.google_tags_tag_value.all_users_ingress.id}')"
+        expression  = "resource.matchTagId('${var.all_users_ingress_tag_key_id}', '${var.all_users_ingress_tag_value_id}')"
       }
     }
   }
