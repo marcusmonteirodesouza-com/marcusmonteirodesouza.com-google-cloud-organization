@@ -47,7 +47,6 @@ module "org_policies" {
   all_users_ingress_tag_key_id         = module.tags.all_users_ingress_tag_key_id
   all_users_ingress_tag_key_short_name = module.tags.all_users_ingress_tag_key_short_name
   all_users_ingress_tag_value_id       = module.tags.all_users_ingress_tag_value_id
-  folder_networking_id                 = module.folders.networking_id
   org_id                               = var.org_id
 }
 
