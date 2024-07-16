@@ -2,6 +2,7 @@ locals {
   enabled_apis = [
     "cloudbuild.googleapis.com",
     "cloudresourcemanager.googleapis.com",
+    "orgpolicy.googleapis.com",
     "secretmanager.googleapis.com",
   ]
 }
