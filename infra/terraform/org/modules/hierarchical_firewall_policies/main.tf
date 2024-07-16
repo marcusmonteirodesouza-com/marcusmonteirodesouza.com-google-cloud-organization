@@ -2,24 +2,24 @@ locals {
   naming_prefix = "${var.naming_convention.prefix}-${var.naming_convention.project}-${var.naming_convention.environment_code}"
 }
 
-resource "google_compute_organization_security_policy" "common" {
+resource "google_compute_organization_security_policy" "common_firewall_rules" {
   provider     = google-beta
-  display_name = "${local.naming_prefix}-common-firewall-rules-${var.naming_convention.suffix}"
+  display_name = "${local.naming_prefix}-orgsecplcy-commonfwrules-${var.naming_convention.suffix}"
   parent       = "organizations/${var.org_id}"
 }
 
-resource "google_compute_organization_security_policy_association" "common" {
+resource "google_compute_organization_security_policy_association" "common_firewall_rules" {
   provider      = google-beta
-  name          = "${google_compute_organization_security_policy.common.id}-org"
-  policy_id     = google_compute_organization_security_policy.common.id
-  attachment_id = google_compute_organization_security_policy.common.parent
+  name          = "${local.naming_prefix}-orgsecplcyassoc-commonfwrules-${var.naming_convention.suffix}"
+  policy_id     = google_compute_organization_security_policy.common_firewall_rules.id
+  attachment_id = google_compute_organization_security_policy.common_firewall_rules.parent
 }
 
 # See https://cloud.google.com/iap/docs/using-tcp-forwarding#create-firewall-rule
-resource "google_compute_organization_security_policy_rule" "common_allow_iap_ssh_rdp" {
+resource "google_compute_organization_security_policy_rule" "common_firewall_rules_allow_iap_ssh_rdp" {
   provider = google-beta
 
-  policy_id = google_compute_organization_security_policy.common.id
+  policy_id = google_compute_organization_security_policy.common_firewall_rules.id
   action    = "allow"
   direction = "INGRESS"
   priority  = 5000
@@ -42,10 +42,10 @@ resource "google_compute_organization_security_policy_rule" "common_allow_iap_ss
 }
 
 # See https://cloud.google.com/load-balancing/docs/health-checks#fw-rule
-resource "google_compute_organization_security_policy_rule" "common_allow_google_hbs_and_hcs" {
+resource "google_compute_organization_security_policy_rule" "common_firewall_rules_allow_google_hbs_and_hcs" {
   provider = google-beta
 
-  policy_id = google_compute_organization_security_policy.common.id
+  policy_id = google_compute_organization_security_policy.common_firewall_rules.id
   action    = "allow"
   direction = "INGRESS"
   priority  = 5200
