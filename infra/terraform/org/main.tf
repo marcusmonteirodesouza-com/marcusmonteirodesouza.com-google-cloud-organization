@@ -8,13 +8,17 @@ locals {
 }
 
 provider "google" {
-  project = var.project_id
-  region  = "northamerica-northeast1"
+  project               = var.project_id
+  region                = "northamerica-northeast1"
+  user_project_override = true
+  billing_project       = var.project_id
 }
 
 provider "google-beta" {
-  project = var.project_id
-  region  = "northamerica-northeast1"
+  project               = var.project_id
+  region                = "northamerica-northeast1"
+  user_project_override = true
+  billing_project       = var.project_id
 }
 
 module "folders" {

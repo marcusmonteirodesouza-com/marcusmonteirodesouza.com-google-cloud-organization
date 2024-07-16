@@ -6,6 +6,7 @@ resource "google_compute_organization_security_policy" "common_firewall_rules" {
   provider     = google-beta
   display_name = "${local.naming_prefix}-orgsecplcy-commonfwrules-${var.naming_convention.suffix}"
   parent       = "organizations/${var.org_id}"
+  type         = "FIREWALL"
 }
 
 resource "google_compute_organization_security_policy_association" "common_firewall_rules" {

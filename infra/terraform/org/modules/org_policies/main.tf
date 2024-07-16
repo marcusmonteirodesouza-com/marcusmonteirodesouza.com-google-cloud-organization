@@ -307,7 +307,7 @@ resource "google_org_policy_policy" "iam_allowedPolicyMemberDomains" {
   spec {
     rules {
       values {
-        allowed_values = ["C011mnovs"]
+        allowed_values = [data.google_organization.org.directory_customer_id]
       }
     }
 

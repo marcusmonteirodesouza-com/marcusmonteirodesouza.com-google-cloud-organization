@@ -4,19 +4,20 @@ locals {
   ]
 
   cloudbuild_sa_org_roles = [
-    "roles/compute.orgFirewallPolicyAdmin",
-    "roles/compute.orgSecurityPolicyAdmin",
     "roles/compute.orgSecurityResourceAdmin",
+    "roles/compute.securityAdmin",
     "roles/compute.xpnAdmin",
     "roles/orgpolicy.policyAdmin",
     "roles/resourcemanager.folderAdmin",
+    "roles/resourcemanager.organizationViewer",
     "roles/resourcemanager.projectCreator",
     "roles/resourcemanager.projectDeleter",
     "roles/resourcemanager.tagAdmin",
   ]
 
   cloudbuild_sa_project_roles = [
-    "roles/logging.logWriter"
+    "roles/logging.logWriter",
+    "roles/serviceusage.serviceUsageConsumer"
   ]
 }
 
