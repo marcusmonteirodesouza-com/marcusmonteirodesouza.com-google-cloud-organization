@@ -3,7 +3,7 @@ locals {
 }
 
 resource "google_cloudbuild_trigger" "plan" {
-  name        = "${var.naming_prefix}-na-ne1-cbt-plan-${var.naming_suffix}"
+  name        = "${local.naming_prefix}-na-ne1-cbt-plan-${var.naming_convention.suffix}"
   description = "Plan - ${var.github_repo_owner}/${var.github_repo_name} PR to 'main'"
   location    = "northamerica-northeast1"
 
@@ -21,14 +21,18 @@ resource "google_cloudbuild_trigger" "plan" {
 
 
   substitutions = {
-    _BILLING_ACCOUNT = var.billing_account
-    _ORG_ID          = var.org_id
-    _TFSTATE_BUCKET  = var.tfstate_bucket
+    _BILLING_ACCOUNT                    = var.billing_account
+    _NAMING_CONVENTION_ENVIRONMENT_CODE = var.naming_convention.environment_code
+    _NAMING_CONVENTION_PREFIX           = var.naming_convention.prefix
+    _NAMING_CONVENTION_SUFFIX           = var.naming_convention.suffix
+    _NAMING_CONVENTION_PROJECT          = var.naming_convention.project
+    _ORG_ID                             = var.org_id
+    _TFSTATE_BUCKET                     = var.tfstate_bucket
   }
 }
 
 resource "google_cloudbuild_trigger" "apply" {
-  name        = "${var.naming_prefix}-na-ne1-cbt-apply-${var.naming_suffix}"
+  name        = "${local.naming_prefix}-na-ne1-cbt-apply-${var.naming_convention.suffix}"
   description = "Apply - ${var.github_repo_owner}/${var.github_repo_name} push to 'main'"
   location    = "northamerica-northeast1"
 
@@ -46,8 +50,12 @@ resource "google_cloudbuild_trigger" "apply" {
 
 
   substitutions = {
-    _BILLING_ACCOUNT = var.billing_account
-    _ORG_ID          = var.org_id
-    _TFSTATE_BUCKET  = var.tfstate_bucket
+    _BILLING_ACCOUNT                    = var.billing_account
+    _NAMING_CONVENTION_ENVIRONMENT_CODE = var.naming_convention.environment_code
+    _NAMING_CONVENTION_PREFIX           = var.naming_convention.prefix
+    _NAMING_CONVENTION_SUFFIX           = var.naming_convention.suffix
+    _NAMING_CONVENTION_PROJECT          = var.naming_convention.project
+    _ORG_ID                             = var.org_id
+    _TFSTATE_BUCKET                     = var.tfstate_bucket
   }
 }

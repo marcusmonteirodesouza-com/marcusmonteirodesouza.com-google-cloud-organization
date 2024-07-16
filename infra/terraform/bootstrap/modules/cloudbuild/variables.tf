@@ -19,14 +19,14 @@ variable "github_repo_name" {
   description = "Github repository name."
 }
 
-variable "naming_prefix" {
-  type        = string
-  description = "Resource naming prefix."
-}
-
-variable "naming_suffix" {
-  type        = string
-  description = "Resource naming suffix."
+variable "naming_convention" {
+  type = object({
+    environment_code = string
+    prefix           = string
+    suffix           = string
+    project          = string
+  })
+  description = "Resource naming convention."
 }
 
 variable "org_id" {

@@ -20,7 +20,7 @@ variable "naming_convention" {
     prefix           = string
     project          = string
   })
-  description = "Resource naming convention variables."
+  description = "Resource naming convention."
 }
 
 variable "org_id" {

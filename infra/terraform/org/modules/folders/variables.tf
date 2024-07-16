@@ -1,9 +1,3 @@
-variable "billing_account" {
-  type        = string
-  description = "The alphanumeric ID of the billing account."
-  sensitive   = true
-}
-
 variable "naming_convention" {
   type = object({
     environment_code = string
@@ -17,11 +11,5 @@ variable "naming_convention" {
 variable "org_id" {
   type        = string
   description = "The numeric ID of the organization."
-  sensitive   = true
-}
-
-variable "project_id" {
-  type        = string
-  description = "The project ID."
   sensitive   = true
 }

@@ -21,7 +21,7 @@ locals {
 }
 
 resource "google_service_account" "cloudbuild" {
-  account_id   = "${var.naming_prefix}-cloudbuild-sa"
+  account_id   = "${local.naming_prefix}-cloudbuild-sa"
   display_name = "Cloud Build Service Account"
 }
 
