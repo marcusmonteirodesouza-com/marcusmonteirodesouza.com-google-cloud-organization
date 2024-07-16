@@ -45,3 +45,9 @@ resource "google_project_iam_member" "cloudbuild_sa" {
   role     = each.value
   member   = "serviceAccount:${google_service_account.cloudbuild.email}"
 }
+
+resource "google_storage_bucket_iam_member" "cloudbuild_sa_tfstate_bucket" {
+  bucket = var.tfstate_bucket
+  role   = "roles/storage.objectUser"
+  member = "serviceAccount:${google_service_account.cloudbuild.email}"
+}

@@ -25,3 +25,9 @@ variable "project_id" {
   description = "The project ID."
   sensitive   = true
 }
+
+variable "tfstate_bucket" {
+  type        = string
+  description = "Terraform state GCS backend bucket name."
+  sensitive   = true
+}

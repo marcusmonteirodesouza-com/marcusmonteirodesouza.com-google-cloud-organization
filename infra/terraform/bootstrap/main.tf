@@ -25,8 +25,9 @@ module "iam" {
     suffix           = local.naming_suffix
     project          = var.naming_convention.project
   }
-  project_id = var.project_id
-  org_id     = var.org_id
+  project_id     = var.project_id
+  org_id         = var.org_id
+  tfstate_bucket = var.tfstate_bucket
 
   depends_on = [
     module.enable_services
