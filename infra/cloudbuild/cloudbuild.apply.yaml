@@ -1,11 +1,11 @@
 steps:
   - name: "hashicorp/terraform"
-    id: terraform-org-plan
+    id: terraform-org-apply
     dir: infra/terraform/org
     script: |
       terraform init -backend-config=bucket=$TFSTATE_BUCKET
 
-      terraform plan
+      terraform apply --auto-approve
     env:
       - "TFSTATE_BUCKET=${_TFSTATE_BUCKET}"
       - "TF_VAR_billing_account=${_BILLING_ACCOUNT}"
