@@ -3,9 +3,9 @@ locals {
 }
 
 resource "google_cloudbuild_trigger" "plan" {
-  name        = "${local.naming_prefix}-na-ne1-cbt-plan-${var.naming_convention.suffix}"
+  name        = "${local.naming_prefix}-us-c1-cbt-plan-${var.naming_convention.suffix}"
   description = "Plan - ${var.github_repo_owner}/${var.github_repo_name} PR to 'main'"
-  location    = "northamerica-northeast1"
+  location    = "us-central1"
 
   service_account = local.cloudbuild_trigger_service_account
 
@@ -32,9 +32,9 @@ resource "google_cloudbuild_trigger" "plan" {
 }
 
 resource "google_cloudbuild_trigger" "apply" {
-  name        = "${local.naming_prefix}-na-ne1-cbt-apply-${var.naming_convention.suffix}"
+  name        = "${local.naming_prefix}-us-c1-cbt-apply-${var.naming_convention.suffix}"
   description = "Apply - ${var.github_repo_owner}/${var.github_repo_name} push to 'main'"
-  location    = "northamerica-northeast1"
+  location    = "us-central1"
 
   service_account = local.cloudbuild_trigger_service_account
 
