@@ -51,3 +51,15 @@ module "org_policies" {
   org_id                               = var.org_id
 }
 
+module "projects" {
+  source = "./modules/projects"
+
+  billing_account      = var.billing_account
+  folder_networking_id = module.folders.networking_id
+  folder_production_id = module.folders.production_id
+  naming_convention    = local.naming_convention
+  org_id               = var.org_id
+  tag_value_ids = [
+    module.tags.all_users_ingress_tag_value_id
+  ]
+}

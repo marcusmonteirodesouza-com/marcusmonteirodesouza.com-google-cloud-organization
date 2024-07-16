@@ -7,7 +7,7 @@ locals {
   ]
 }
 
-resource "google_project_service" "enable_apis" {
+resource "google_project_service" "enable_services" {
   for_each                   = toset(local.enabled_apis)
   service                    = each.value
   disable_dependent_services = false
