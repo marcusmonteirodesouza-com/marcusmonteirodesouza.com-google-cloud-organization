@@ -1,5 +1,5 @@
 locals {
-  folder_prefix = local.folder_prefix
+  folder_prefix = "${var.naming_convention.prefix}-fldr"
 }
 
 resource "google_folder" "networking" {
