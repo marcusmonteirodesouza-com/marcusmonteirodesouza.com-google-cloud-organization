@@ -26,7 +26,7 @@ resource "google_compute_shared_vpc_service_project" "service" {
 
 resource "google_project_iam_member" "admins_group_host_project" {
   for_each = { for key, value in toset(local.host_admins_group_project_roles) : key => value if var.is_shared_vpc_host }
-  project  = var.shared_vpc_host_project_id
+  project  = google_project.project.project_id
   role     = each.value
   member   = "group:${var.admins_group_email}"
 }
