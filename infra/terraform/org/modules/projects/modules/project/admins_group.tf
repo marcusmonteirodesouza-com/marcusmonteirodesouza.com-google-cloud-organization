@@ -11,3 +11,9 @@ resource "google_project_iam_member" "admins_group" {
   role     = each.value
   member   = "group:${var.admins_group_email}"
 }
+
+resource "google_storage_bucket_iam_member" "admins_group_tfstate" {
+  bucket = google_storage_bucket.tfstate.name
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${google_service_account.cloudbuild.email}"
+}
