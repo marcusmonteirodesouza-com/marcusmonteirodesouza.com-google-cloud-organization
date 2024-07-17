@@ -26,12 +26,6 @@ resource "google_project_iam_member" "cloudbuild_sa" {
   member   = "serviceAccount:${google_service_account.cloudbuild.email}"
 }
 
-resource "google_service_account_iam_member" "cloudbuild_sa_admins_group" {
-  service_account_id = google_service_account.cloudbuild.id
-  role               = "roles/iam.serviceAccountTokenCreator"
-  member             = "group:${var.admins_group_email}"
-}
-
 resource "google_storage_bucket_iam_member" "cloudbuild_sa_tfstate" {
   bucket = google_storage_bucket.tfstate.name
   role   = "roles/storage.objectUser"
