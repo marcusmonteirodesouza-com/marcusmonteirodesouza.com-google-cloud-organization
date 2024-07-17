@@ -1,4 +1,8 @@
 locals {
+  host_admins_group_project_roles = [
+    "roles/compute.networkAdmin"
+  ]
+
   host_service_cloudbuild_sa_roles = [
     "roles/compute.networkUser",
     "roles/vpcaccess.viewer"
@@ -18,6 +22,13 @@ resource "google_compute_shared_vpc_service_project" "service" {
   count           = var.is_shared_vpc_host ? 0 : 1
   host_project    = var.shared_vpc_host_project_id
   service_project = google_project.project.project_id
+}
+
+resource "google_project_iam_member" "admins_group_host_project" {
+  for_each = { for key, value in toset(local.host_admins_group_project_roles) : key => value if var.is_shared_vpc_host }
+  project  = var.shared_vpc_host_project_id
+  role     = each.value
+  member   = "group:${var.admins_group_email}"
 }
 
 resource "google_project_iam_member" "cloudbuild_sa_host_service" {
