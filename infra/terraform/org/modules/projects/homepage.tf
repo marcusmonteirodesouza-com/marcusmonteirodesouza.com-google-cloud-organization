@@ -27,7 +27,8 @@ module "homepage_production" {
   org_id = var.org_id
   service_accounts = {
     resume-generator-cf = [
-      "roles/aiplatform.user"
+      "roles/aiplatform.user",
+      "roles/logging.logWriter"
     ]
     web-frontend = [
       "roles/logging.logWriter"
