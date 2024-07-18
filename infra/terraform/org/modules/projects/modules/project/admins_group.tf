@@ -1,6 +1,7 @@
 locals {
   admins_group_project_roles = [
     "roles/cloudbuild.builds.editor",
+    "roles/serviceusage.serviceUsageConsumer",
     "roles/viewer",
   ]
 
