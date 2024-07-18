@@ -5,7 +5,7 @@ steps:
     script: |
       terraform init -backend-config=bucket=$TFSTATE_BUCKET
 
-      terraform plan
+      terraform plan -lock-timeout=60m
     env:
       - "TFSTATE_BUCKET=${_TFSTATE_BUCKET}"
       - "TF_VAR_billing_account=${_BILLING_ACCOUNT}"
