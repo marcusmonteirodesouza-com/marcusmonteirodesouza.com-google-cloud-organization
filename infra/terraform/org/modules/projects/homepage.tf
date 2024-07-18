@@ -13,6 +13,8 @@ module "homepage_production" {
   ]
   display_name = "${local.homepage_project_display_name_prefix} - Production"
   enable_services = [
+    "aiplatform.googleapis.com",
+    "cloudfunctions.googleapis.com"
   ]
   folder_id          = var.folder_production_id
   is_shared_vpc_host = false
@@ -24,6 +26,9 @@ module "homepage_production" {
   }
   org_id = var.org_id
   service_accounts = {
+    resume-generator-cf = [
+      "roles/aiplatform.user"
+    ]
     web-frontend = [
       "roles/logging.logWriter"
     ]
