@@ -2,9 +2,9 @@ steps:
   - name: "hashicorp/terraform"
     id: terraform-deploy-apply
     script: |
-      terraform -chdir=infra/terraform/deploy/envs/${ENVIRONMENT} init -backend-config=bucket=$TFSTATE_BUCKET
+      terraform -chdir=infra/terraform/deploy/environments/${ENVIRONMENT} init -backend-config=bucket=$TFSTATE_BUCKET
 
-      terraform -chdir=infra/terraform/deploy/envs/${ENVIRONMENT} apply -lock-timeout=60m --auto-approve
+      terraform -chdir=infra/terraform/deploy/environments/${ENVIRONMENT} apply -lock-timeout=60m --auto-approve
     env:
       - "TFSTATE_BUCKET=${_TFSTATE_BUCKET}"
       - "TF_VAR_billing_account=${_BILLING_ACCOUNT}"
