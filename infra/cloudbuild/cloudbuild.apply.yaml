@@ -1,18 +1,13 @@
 steps:
   - name: "hashicorp/terraform"
-    id: terraform-org-apply
-    dir: infra/terraform/org
+    id: terraform-deploy-apply
     script: |
-      terraform init -backend-config=bucket=$TFSTATE_BUCKET
+      terraform -chdir=infra/deployment/terraform/deploy/envs/${ENVIRONMENT} init -backend-config=bucket=$TFSTATE_BUCKET
 
-      terraform apply -lock-timeout=60m --auto-approve
+      terraform -chdir=infra/deployment/terraform/deploy/envs/${ENVIRONMENT} apply -lock-timeout=60m --auto-approve
     env:
       - "TFSTATE_BUCKET=${_TFSTATE_BUCKET}"
       - "TF_VAR_billing_account=${_BILLING_ACCOUNT}"
-      - "TF_VAR_naming_convention_environment_code=${_NAMING_CONVENTION_ENVIRONMENT_CODE}"
-      - "TF_VAR_naming_convention_prefix=${_NAMING_CONVENTION_PREFIX}"
-      - "TF_VAR_naming_convention_suffix=${_NAMING_CONVENTION_SUFFIX}"
-      - "TF_VAR_naming_convention_project=${_NAMING_CONVENTION_PROJECT}"
       - "TF_VAR_org_id=${_ORG_ID}"
       - "TF_VAR_project_id=${PROJECT_ID}"
 options:
