@@ -7,13 +7,14 @@ locals {
     "roles/compute.orgSecurityResourceAdmin",
     "roles/compute.securityAdmin",
     "roles/compute.xpnAdmin",
+    "roles/iam.serviceAccountAdmin",
     "roles/orgpolicy.policyAdmin",
     "roles/resourcemanager.folderAdmin",
     "roles/resourcemanager.organizationViewer",
     "roles/resourcemanager.projectCreator",
     "roles/resourcemanager.projectDeleter",
     "roles/resourcemanager.tagAdmin",
-    "roles/iam.serviceAccountAdmin"
+    "roles/storage.admin",
   ]
 
   cloudbuild_sa_project_roles = [
