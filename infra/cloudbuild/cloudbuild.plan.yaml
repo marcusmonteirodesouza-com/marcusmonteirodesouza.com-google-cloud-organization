@@ -2,9 +2,9 @@ steps:
   - name: "hashicorp/terraform"
     id: terraform-deploy-plan
     script: |
-      terraform -chdir=infra/deployment/terraform/deploy/envs/${ENVIRONMENT} init -backend-config=bucket=$TFSTATE_BUCKET
+      terraform -chdir=infra/terraform/deploy/envs/${ENVIRONMENT} init -backend-config=bucket=$TFSTATE_BUCKET
 
-      terraform -chdir=infra/deployment/terraform/deploy/envs/${ENVIRONMENT} plan -lock-timeout=60m
+      terraform -chdir=infra/terraform/deploy/envs/${ENVIRONMENT} plan -lock-timeout=60m
     env:
       - "TFSTATE_BUCKET=${_TFSTATE_BUCKET}"
       - "TF_VAR_billing_account=${_BILLING_ACCOUNT}"
