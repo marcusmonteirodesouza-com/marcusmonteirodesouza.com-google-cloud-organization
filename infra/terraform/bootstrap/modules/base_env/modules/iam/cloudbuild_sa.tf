@@ -13,6 +13,7 @@ locals {
     "roles/resourcemanager.projectCreator",
     "roles/resourcemanager.projectDeleter",
     "roles/resourcemanager.tagAdmin",
+    "roles/iam.serviceAccountAdmin"
   ]
 
   cloudbuild_sa_project_roles = [
