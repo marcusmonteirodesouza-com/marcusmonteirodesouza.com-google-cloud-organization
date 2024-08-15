@@ -14,6 +14,7 @@ locals {
     "roles/resourcemanager.projectCreator",
     "roles/resourcemanager.projectDeleter",
     "roles/resourcemanager.tagAdmin",
+    "roles/serviceusage.serviceUsageAdmin",
     "roles/storage.admin",
   ]
 
