@@ -1,14 +1,17 @@
 locals {
-  host_admins_group_project_roles = [
+  host_admins_group_host_project_roles = [
     "roles/compute.networkAdmin"
   ]
 
-  host_service_cloudbuild_sa_roles = [
-    "roles/compute.networkUser",
-    "roles/vpcaccess.viewer"
+  service_project_cloudbuild_sa_host_project_roles = [
+    "roles/compute.networkViewer",
   ]
 
-  service_host_cloudbuild_sa_roles = [
+  service_project_cloudrun_sa_host_project_roles = [
+    "roles/compute.networkUser",
+  ]
+
+  host_project_cloudbuild_sa_service_project_roles = [
     "roles/compute.loadBalancerServiceUser"
   ]
 }
@@ -24,29 +27,29 @@ resource "google_compute_shared_vpc_service_project" "service" {
   service_project = google_project.project.project_id
 }
 
-resource "google_project_iam_member" "admins_group_host_project" {
-  for_each = { for key, value in toset(local.host_admins_group_project_roles) : key => value if var.is_shared_vpc_host }
+resource "google_project_iam_member" "host_project_admins_group_host_project" {
+  for_each = { for key, value in toset(local.host_admins_group_host_project_roles) : key => value if var.is_shared_vpc_host }
   project  = google_project.project.project_id
   role     = each.value
   member   = "group:${var.admins_group_email}"
 }
 
-resource "google_project_iam_member" "cloudbuild_sa_host_service" {
-  for_each = { for key, value in toset(local.host_service_cloudbuild_sa_roles) : key => value if !var.is_shared_vpc_host }
+resource "google_project_iam_member" "service_project_cloudbuild_sa_host_project" {
+  for_each = { for key, value in toset(local.service_project_cloudbuild_sa_host_project_roles) : key => value if !var.is_shared_vpc_host }
   project  = var.shared_vpc_host_project_id
   role     = each.value
   member   = "serviceAccount:${google_service_account.cloudbuild.email}"
 }
 
-resource "google_project_iam_member" "cloudrun_sa_host_service" {
-  count   = var.is_shared_vpc_host ? 0 : 1
-  project = var.shared_vpc_host_project_id
-  role    = "roles/vpcaccess.user"
-  member  = "serviceAccount:${google_project_service_identity.cloudrun_sa.email}"
+resource "google_project_iam_member" "service_project_cloudrun_sa_host_project" {
+  for_each = { for key, value in toset(local.service_project_cloudrun_sa_host_project_roles) : key => value if !var.is_shared_vpc_host }
+  project  = var.shared_vpc_host_project_id
+  role     = each.value
+  member   = "serviceAccount:${google_project_service_identity.cloudrun_sa.email}"
 }
 
-resource "google_project_iam_member" "shared_vpc_host_cloudbuild_sa_service_host" {
-  for_each = { for key, value in toset(local.service_host_cloudbuild_sa_roles) : key => value if !var.is_shared_vpc_host }
+resource "google_project_iam_member" "host_project_cloudbuild_sa_service_project" {
+  for_each = { for key, value in toset(local.host_project_cloudbuild_sa_service_project_roles) : key => value if !var.is_shared_vpc_host }
   project  = google_project.project.project_id
   role     = each.value
   member   = "serviceAccount:${var.shared_vpc_host_cloudbuild_sa_email}"
