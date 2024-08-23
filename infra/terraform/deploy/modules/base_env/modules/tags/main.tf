@@ -6,5 +6,5 @@ resource "google_tags_tag_key" "all_users_ingress" {
 resource "google_tags_tag_value" "all_users_ingress" {
   parent      = "tagKeys/${google_tags_tag_key.all_users_ingress.name}"
   short_name  = "allUsersIngress"
-  description = "Allow for allUsers"
+  description = "Allow allUsers ingress (unauthenticated invocations)."
 }
